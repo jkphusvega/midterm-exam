@@ -65,10 +65,11 @@ export default function Game() {
         bgmRef.current.volume = 0.3;
         
         const handleResize = () => {
-            if (canvasRef.current) {
+            if (canvasRef.current && containerRef.current) {
                 const cvs = canvasRef.current;
-                cvs.width = cvs.clientWidth;
-                cvs.height = cvs.clientHeight;
+                const cont = containerRef.current;
+                cvs.width = cont.clientWidth;
+                cvs.height = cont.clientHeight;
                 core.current.scaleX = 1;
             }
         };
@@ -415,9 +416,9 @@ export default function Game() {
         c.playerName = inputName.trim();
         c.lives = 3; c.score = 0; c.redBricks = 0; c.pausedDuration = 0; c.timeSeconds = 0;
         
-        if (canvasRef.current) {
-            canvasRef.current.width = canvasRef.current.clientWidth;
-            canvasRef.current.height = canvasRef.current.clientHeight;
+        if (canvasRef.current && containerRef.current) {
+            canvasRef.current.width = containerRef.current.clientWidth;
+            canvasRef.current.height = containerRef.current.clientHeight;
         }
 
         initLevel();
@@ -473,26 +474,24 @@ export default function Game() {
 
     return (
         <div className="layout-container">
-            <div id="game-wrapper" ref={containerRef}>
-                {(gameState === 'PLAYING' || gameState === 'PAUSED' || gameState === 'COUNTDOWN') && (
-                    <div className="mobile-hud">
-                        <div className="hud-stats">
-                            <span className="hud-lives">{'❤️'.repeat(uiState.lives)}</span>
-                            <span className="hud-divider">|</span>
-                            <span className="hud-time">{uiState.time}</span>
-                            <span className="hud-divider">|</span>
-                            <span className="hud-target" style={{color: COLORS.red}}>🎯 {uiState.targets}</span>
-                        </div>
-                        <div className="hud-controls">
-                            <button className="hud-btn" onClick={togglePause} disabled={gameState !== 'PLAYING' && gameState !== 'PAUSED'}>
-                                {gameState === 'PAUSED' ? '▶' : '⏸'}
-                            </button>
-                            <button className="hud-btn" onClick={exitToMain}>↩</button>
-                            <button className="hud-btn danger" onClick={missionFailed} disabled={gameState !== 'PLAYING' && gameState !== 'PAUSED'}>✕</button>
-                        </div>
-                    </div>
-                )}
+            <div className={`mobile-hud${['PLAYING', 'PAUSED', 'COUNTDOWN'].indexOf(gameState) === -1 ? ' hud-hidden' : ''}`}>
+                <div className="hud-stats">
+                    <span className="hud-lives">{'❤️'.repeat(uiState.lives)}</span>
+                    <span className="hud-divider">|</span>
+                    <span className="hud-time">{uiState.time}</span>
+                    <span className="hud-divider">|</span>
+                    <span className="hud-target" style={{color: COLORS.red}}>🎯 {uiState.targets}</span>
+                </div>
+                <div className="hud-controls">
+                    <button className="hud-btn" onClick={togglePause} disabled={gameState !== 'PLAYING' && gameState !== 'PAUSED'}>
+                        {gameState === 'PAUSED' ? '▶' : '⏸'}
+                    </button>
+                    <button className="hud-btn" onClick={exitToMain}>↩</button>
+                    <button className="hud-btn danger" onClick={missionFailed} disabled={gameState !== 'PLAYING' && gameState !== 'PAUSED'}>✕</button>
+                </div>
+            </div>
 
+            <div id="game-wrapper" ref={containerRef}>
                 <canvas
                     ref={canvasRef}
                     onTouchStart={handleTouchStart}

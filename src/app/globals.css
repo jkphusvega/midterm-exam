@@ -457,11 +457,13 @@ canvas {
     justify-content: space-between;
     padding: 6px 10px;
     background: rgba(10, 18, 35, 0.95);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     flex-shrink: 0;
-    position: relative;
-    z-index: 25;
     gap: 6px;
+  }
+
+  .mobile-hud.hud-hidden {
+    visibility: hidden;
   }
 
   .hud-stats {
