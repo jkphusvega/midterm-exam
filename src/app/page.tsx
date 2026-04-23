@@ -475,9 +475,28 @@ export default function Game() {
     return (
         <div className="layout-container">
             <div id="game-wrapper" ref={containerRef}>
-                <canvas 
-                    ref={canvasRef} 
-                    onTouchStart={handleTouchStart} 
+                {(gameState === 'PLAYING' || gameState === 'PAUSED' || gameState === 'COUNTDOWN') && (
+                    <div className="mobile-hud">
+                        <div className="hud-stats">
+                            <span className="hud-lives">{'❤️'.repeat(uiState.lives)}</span>
+                            <span className="hud-divider">|</span>
+                            <span className="hud-time">{uiState.time}</span>
+                            <span className="hud-divider">|</span>
+                            <span className="hud-target" style={{color: COLORS.red}}>🎯 {uiState.targets}</span>
+                        </div>
+                        <div className="hud-controls">
+                            <button className="hud-btn" onClick={togglePause} disabled={gameState !== 'PLAYING' && gameState !== 'PAUSED'}>
+                                {gameState === 'PAUSED' ? '▶' : '⏸'}
+                            </button>
+                            <button className="hud-btn" onClick={exitToMain}>↩</button>
+                            <button className="hud-btn danger" onClick={missionFailed} disabled={gameState !== 'PLAYING' && gameState !== 'PAUSED'}>✕</button>
+                        </div>
+                    </div>
+                )}
+
+                <canvas
+                    ref={canvasRef}
+                    onTouchStart={handleTouchStart}
                     onTouchMove={handleTouchMove}
                 />
 

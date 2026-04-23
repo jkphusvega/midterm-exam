@@ -205,15 +205,7 @@ canvas {
 
 @media (max-width: 768px) {
   .sidebar {
-    width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-
-  .desktop-only {
-    display: none !important;
+    display: none;
   }
 }
 
@@ -451,3 +443,89 @@ canvas {
   text-align: center;
 }
 .rank-item:last-child { border-bottom: none; }
+
+/* Mobile HUD bar (desktop에서는 숨김) */
+.mobile-hud {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-hud {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+    background: rgba(10, 18, 35, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 25;
+    gap: 6px;
+  }
+
+  .hud-stats {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .hud-divider {
+    color: rgba(255, 255, 255, 0.25);
+    font-weight: 300;
+  }
+
+  .hud-lives {
+    font-size: 0.8rem;
+    letter-spacing: -1px;
+  }
+
+  .hud-time {
+    color: white;
+    font-family: monospace;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  .hud-target {
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  .hud-controls {
+    display: flex;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+
+  .hud-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+    line-height: 1;
+  }
+
+  .hud-btn:active:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .hud-btn.danger {
+    color: #f87171;
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+
+  .hud-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
