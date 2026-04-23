@@ -38,9 +38,25 @@ body {
 }
 
 @media (max-width: 768px) {
+  body {
+    height: 100svh;
+    min-height: unset;
+    overflow: hidden;
+  }
+
   .layout-container {
     flex-direction: column;
-    padding: 10px;
+    padding: 8px;
+    gap: 8px;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  #game-wrapper {
+    height: auto;
+    min-height: 0;
+    flex: 1;
+    border-radius: 12px;
   }
 }
 
@@ -190,10 +206,14 @@ canvas {
 @media (max-width: 768px) {
   .sidebar {
     width: 100%;
-    max-width: 480px;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .desktop-only {
+    display: none !important;
   }
 }
 
@@ -210,8 +230,19 @@ canvas {
 
 @media (max-width: 768px) {
   .info-card {
-    flex: 1 1 45%;
-    padding: 12px;
+    flex: 1 1 28%;
+    padding: 6px 4px;
+    min-width: 0;
+  }
+
+  .info-value {
+    font-size: 1.1rem;
+  }
+
+  .info-label {
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
   }
 }
 
@@ -239,7 +270,9 @@ canvas {
 @media (max-width: 768px) {
   .controls-group {
     flex-direction: row;
-    width: 100%;
+    flex: 0 0 100%;
+    margin-top: 0;
+    gap: 6px;
   }
 }
 
@@ -281,8 +314,8 @@ canvas {
 
 @media (max-width: 768px) {
   .btn-sidebar {
-    padding: 12px;
-    font-size: 0.9rem;
+    padding: 10px 4px;
+    font-size: 0.75rem;
   }
 }
 

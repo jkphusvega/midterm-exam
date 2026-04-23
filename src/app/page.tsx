@@ -543,7 +543,7 @@ export default function Game() {
             </div>
 
             <div className="sidebar">
-                <div className="info-card">
+                <div className="info-card desktop-only">
                     <div className="info-label">PLAYER</div>
                     <div className="info-value">{playerName || '-'}</div>
                 </div>
@@ -555,7 +555,7 @@ export default function Game() {
                     <div className="info-label">TIME</div>
                     <div className="info-value">{uiState.time}</div>
                 </div>
-                <div className="info-card">
+                <div className="info-card desktop-only">
                     <div className="info-label">SCORE</div>
                     <div className="info-value">{uiState.score}</div>
                 </div>
