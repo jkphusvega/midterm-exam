@@ -65,12 +65,11 @@ export default function Game() {
         bgmRef.current.volume = 0.3;
         
         const handleResize = () => {
-            if (canvasRef.current && containerRef.current) {
+            if (canvasRef.current) {
                 const cvs = canvasRef.current;
-                const cont = containerRef.current;
-                cvs.width = cont.clientWidth;
-                cvs.height = cont.clientHeight;
-                core.current.scaleX = cvs.width / cont.clientWidth;
+                cvs.width = cvs.clientWidth;
+                cvs.height = cvs.clientHeight;
+                core.current.scaleX = 1;
             }
         };
         window.addEventListener('resize', handleResize);
@@ -416,9 +415,9 @@ export default function Game() {
         c.playerName = inputName.trim();
         c.lives = 3; c.score = 0; c.redBricks = 0; c.pausedDuration = 0; c.timeSeconds = 0;
         
-        if (canvasRef.current && containerRef.current) {
-            canvasRef.current.width = containerRef.current.clientWidth;
-            canvasRef.current.height = containerRef.current.clientHeight;
+        if (canvasRef.current) {
+            canvasRef.current.width = canvasRef.current.clientWidth;
+            canvasRef.current.height = canvasRef.current.clientHeight;
         }
 
         initLevel();
